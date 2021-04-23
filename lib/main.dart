@@ -28,6 +28,12 @@ class _HomeState extends State<Home> {
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
+        child: Form(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[],
+          ),
+        ),
       ),
     );
   }
