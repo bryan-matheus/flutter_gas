@@ -22,6 +22,7 @@ class _HomeState extends State<Home> {
           "Alcool  ou Gasolina",
           style: TextStyle(color: Colors.white),
         ),
+        centerTitle: true,
       ),
     );
   }
