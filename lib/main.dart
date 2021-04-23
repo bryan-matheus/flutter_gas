@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Gas",
+          "Alcool  ou Gasolina",
           style: TextStyle(color: Colors.white),
         ),
       ),
