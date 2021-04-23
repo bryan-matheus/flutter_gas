@@ -31,7 +31,13 @@ class _HomeState extends State<Home> {
         child: Form(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[],
+            children: [
+              Icon(
+                Icons.local_gas_station,
+                size: 160,
+                color: Colors.lightBlue[900],
+              )
+            ],
           ),
         ),
       ),
