@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
             children: [
               Icon(
                 Icons.local_gas_station,
-                size: 160,
+                size: 160.0,
                 color: Colors.lightBlue[900],
               )
             ],
