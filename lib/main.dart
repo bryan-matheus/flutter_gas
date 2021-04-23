@@ -26,6 +26,9 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         backgroundColor: Colors.lightBlue[900],
       ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
+      ),
     );
   }
 }
