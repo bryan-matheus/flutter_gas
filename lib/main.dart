@@ -24,6 +24,7 @@ class _HomeState extends State<Home> {
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
+        backgroundColor: Colors.lightBlue[900],
       ),
     );
   }
