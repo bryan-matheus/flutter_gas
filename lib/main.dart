@@ -1,14 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
-      home: Home(),
-      debugShowCheckedModeBanner: false,
-    ),
-  );
+  runApp(MaterialApp(
+    home: Home(),
+    debugShowCheckedModeBanner: false,
+  ));
 }
 
 class Home extends StatefulWidget {
@@ -17,12 +13,32 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  TextEditingController alcoolController = TextEditingController();
+  TextEditingController gasolinaController = TextEditingController();
+
+  String _resultado = "Informe os valores";
+
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  void _calcularCombustivelIdeal() {
+    setState(() {
+      double vAlcool = double.parse(alcoolController.text.replaceAll(",", "."));
+      double vGasolina =
+          double.parse(gasolinaController.text.replaceAll(",", "."));
+
+      double proporcao = vAlcool / vGasolina;
+
+      _resultado =
+          (proporcao < 0.7) ? "Abasteça com alcool" : "Abasteça com gasolina";
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Alcool  ou Gasolina",
+          "Álcool ou Gasolina",
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
@@ -40,47 +56,44 @@ class _HomeState extends State<Home> {
                 color: Colors.lightBlue[900],
               ),
               TextFormField(
+                controller: gasolinaController,
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
-                style: TextStyle(color: Colors.lightBlue[900], fontSize: 26),
+                style: TextStyle(color: Colors.lightBlue[900], fontSize: 26.0),
                 decoration: InputDecoration(
-                  labelText: "Valor da gasolina",
-                  labelStyle: TextStyle(
-                    color: Colors.lightBlue[900],
-                  ),
-                ),
+                    labelText: "Valor da Gasolina",
+                    labelStyle: TextStyle(color: Colors.lightBlue[900])),
               ),
               TextFormField(
+                controller: alcoolController,
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
-                style: TextStyle(color: Colors.lightBlue[900], fontSize: 26),
+                style: TextStyle(color: Colors.lightBlue[900], fontSize: 26.0),
                 decoration: InputDecoration(
-                  labelText: "Valor da alcool",
-                  labelStyle: TextStyle(
-                    color: Colors.lightBlue[900],
-                  ),
-                ),
+                    labelText: "Valor da Álcool",
+                    labelStyle: TextStyle(color: Colors.lightBlue[900])),
               ),
               Padding(
-                padding: EdgeInsets.only(
-                  top: 20,
-                  bottom: 20,
-                ),
+                padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
                 child: Container(
-                  height: 50,
+                  height: 50.0,
                   child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("Verificar"),
+                    onPressed: () {
+                      _calcularCombustivelIdeal();
+                    },
+                    child: Text('Verificar'),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.lightBlue[900],
-                      onPrimary: Colors.white,
-                      textStyle: TextStyle(
-                        fontSize: 25,
-                      ),
-                    ),
+                        primary: Colors.lightBlue[900],
+                        onPrimary: Colors.white,
+                        textStyle: TextStyle(fontSize: 25.0)),
                   ),
                 ),
               ),
+              Text(
+                _resultado,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.lightBlue[900], fontSize: 26.0),
+              )
             ],
           ),
         ),
