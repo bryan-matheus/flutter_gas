@@ -13,31 +13,29 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  TextEditingController alcoolController = TextEditingController();
-  TextEditingController gasolinaController = TextEditingController();
-
+  TextEditingController alcoolcontroller = TextEditingController();
+  TextEditingController gasolinacontroller = TextEditingController();
   String _resultado = "Informe os valores";
-
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  void _calcularCombustivelIdeal() {
+  void _calculaCombustivelIdeal() {
+    double vAlcool = double.parse(alcoolcontroller.text.replaceAll(',', '.'));
+    double vGas = double.parse(gasolinacontroller.text.replaceAll(',', '.'));
+    double proporcao = vAlcool / vGas;
+
     setState(() {
-      double vAlcool = double.parse(alcoolController.text.replaceAll(",", "."));
-      double vGasolina =
-          double.parse(gasolinaController.text.replaceAll(",", "."));
-
-      double proporcao = vAlcool / vGasolina;
-
       _resultado =
-          (proporcao < 0.7) ? "Abasteça com alcool" : "Abasteça com gasolina";
+          (proporcao < 0.7) ? "Abasteça com Álcool" : "Abasteça com Gasolina";
     });
   }
 
   void _reset() {
-    alcoolController.text = "";
-    gasolinaController.text = "";
-    _resultado = "Informe os valores";
-    _formKey = GlobalKey<FormState>();
+    setState(() {
+      alcoolcontroller.text = "";
+      gasolinacontroller.text = "";
+      _resultado = "Informe os valores";
+      _formKey = GlobalKey<FormState>();
+    });
   }
 
   @override
@@ -50,12 +48,7 @@ class _HomeState extends State<Home> {
         ),
         centerTitle: true,
         backgroundColor: Colors.lightBlue[900],
-        actions: [
-          IconButton(
-            icon: Icon(Icons.refresh),
-            onPressed: _reset,
-          )
-        ],
+        actions: [IconButton(icon: Icon(Icons.refresh), onPressed: _reset)],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
@@ -70,7 +63,7 @@ class _HomeState extends State<Home> {
                 color: Colors.lightBlue[900],
               ),
               TextFormField(
-                controller: gasolinaController,
+                controller: gasolinacontroller,
                 validator: (value) =>
                     value!.isEmpty ? "Informe o valor da gasolina" : null,
                 textAlign: TextAlign.center,
@@ -81,9 +74,9 @@ class _HomeState extends State<Home> {
                     labelStyle: TextStyle(color: Colors.lightBlue[900])),
               ),
               TextFormField(
-                controller: alcoolController,
+                controller: alcoolcontroller,
                 validator: (value) =>
-                    value!.isEmpty ? "Informe o valor do alcool" : null,
+                    value!.isEmpty ? "Informe o valor do Álcooo" : null,
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
                 style: TextStyle(color: Colors.lightBlue[900], fontSize: 26.0),
@@ -98,7 +91,7 @@ class _HomeState extends State<Home> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        _calcularCombustivelIdeal();
+                        _calculaCombustivelIdeal();
                       }
                     },
                     child: Text('Verificar'),
