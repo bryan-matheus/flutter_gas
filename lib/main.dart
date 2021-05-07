@@ -47,6 +47,7 @@ class _HomeState extends State<Home> {
       body: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
         child: Form(
+          key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -57,6 +58,8 @@ class _HomeState extends State<Home> {
               ),
               TextFormField(
                 controller: gasolinaController,
+                validator: (value) =>
+                    value!.isEmpty ? "Informe o valor da gasolina" : null,
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
                 style: TextStyle(color: Colors.lightBlue[900], fontSize: 26.0),
@@ -66,6 +69,8 @@ class _HomeState extends State<Home> {
               ),
               TextFormField(
                 controller: alcoolController,
+                validator: (value) =>
+                    value!.isEmpty ? "Informe o valor do alcool" : null,
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
                 style: TextStyle(color: Colors.lightBlue[900], fontSize: 26.0),
@@ -79,7 +84,9 @@ class _HomeState extends State<Home> {
                   height: 50.0,
                   child: ElevatedButton(
                     onPressed: () {
-                      _calcularCombustivelIdeal();
+                      if (_formKey.currentState!.validate()) {
+                        _calcularCombustivelIdeal();
+                      }
                     },
                     child: Text('Verificar'),
                     style: ElevatedButton.styleFrom(
